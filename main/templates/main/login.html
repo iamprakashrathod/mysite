@@ -1,0 +1,27 @@
+{% extends "main/header.html" %}
+
+{% block content %}
+<div class="container">
+    <h2>Login</h2>
+    <form method="POST" class="col s12">
+        {% csrf_token %}
+        <div class="row">
+            {{ form.non_field_errors }}
+            {% for field in form %}
+                <div class="input-field col s12">
+                    {{ field.label_tag }}
+                    {{ field }}
+                    {% if field.help_text %}
+                        <small class="helper-text">{{ field.help_text }}</small>
+                    {% endif %}
+                    {% for error in field.errors %}
+                        <div class="helper-text red-text" data-error="wrong">{{ error }}</div>
+                    {% endfor %}
+                </div>
+            {% endfor %}
+        </div>
+        <button type="submit" class="btn waves-effect waves-light">Login</button>
+    </form>
+    <p>If you don't have an account, <a href="/register">Register</a> here.</p>
+</div>
+{% endblock %}
